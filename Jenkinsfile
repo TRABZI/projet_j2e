@@ -19,7 +19,8 @@ pipeline {
      		def mvnHome = tool name: 'maven', type: 'maven'
      		sh "echo '${mvnHome}/bin/mvn' "
      		sh "${mvnHome}/bin/mvn clean compile package "
-   	}	}
+   		}
+	}
 
    	stage('log-in'){
 		steps{
