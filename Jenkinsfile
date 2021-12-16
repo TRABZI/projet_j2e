@@ -1,6 +1,11 @@
 node {
     def app
 
+    environment {
+      registry = "mohammedaminetrabzi/docker_test"
+      registryCredential = ‘mon_id_docker’
+    }
+
     stage('Clone repository') {
         	git 'https://gitlab.com/khlifidev1/projet_j2e'
     }
@@ -19,7 +24,7 @@ node {
    }
 
    stage('Build Dockerfile image'){
-        docker.withRegistry('https://id.docker.com/', 'mon_id_docker') {
+        docker.withRegistry('', 'registryCredential') {
 		 app = docker.build("mohammedaminetrabzi/tomcat")
 
               docker.image('tomcat:9.0').withrun(' -p 8880:80') { c ->
