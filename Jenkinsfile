@@ -12,13 +12,6 @@ node {
         }
     }
 
-    stage('Gate Quality Pass'){
-        def qualitygate = waitForQualityGate()
-        if (qualitygate.status != "OK") {
-                error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-        }
-    }
-
    stage('Maven Compile &  Package'){
      def mvnHome = tool name: 'maven', type: 'maven'
      sh "echo '${mvnHome}/bin/mvn' "
@@ -36,7 +29,7 @@ node {
                 }
     app.push()
 
-        }
+    }
 
   }
 }
