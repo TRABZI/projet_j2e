@@ -1,5 +1,5 @@
 pipeline {
-
+    agent {label 'tomcat'}
     environment {
 	DOCKERHUB_CREDENTIALS=credentials('mohammedaminetrabzi-dockerhub')
 	}
