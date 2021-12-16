@@ -19,9 +19,8 @@ node {
    }
 
    stage('Build Dockerfile image'){
-        docker.withRegistry('https://id.docker.com/', 'f5201b2e-4d26-4fba-9a2c-32f35d896597') {
+        docker.withRegistry('https://id.docker.com/', 'mon_id_docker') {
 		 app = docker.build("mohammedaminetrabzi/tomcat")
-
 
               docker.image('tomcat:9.0').withrun(' -p 8880:80') { c ->
                    sh 'docker ps'
