@@ -26,5 +26,4 @@ node {
     sh 'docker push mohammedaminetrabzi/docker_test'
 	
    }
-  }
 }
