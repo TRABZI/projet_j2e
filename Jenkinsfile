@@ -1,12 +1,12 @@
 pipeline {
-    agent {label 'tomcat'}
+    agent any
     environment {
 	DOCKERHUB_CREDENTIALS=credentials('mohammedaminetrabzi-dockerhub')
 	}
 
     stages{
     	stage('SonarQube Built-in Code analysis') {
-        	steps{ 	
+        	steps { 	
 		 def scannerHome = tool 'sonar'
        	         withSonarQubeEnv('sonar'){
                		sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://141.95.160.233:9000/ -Dsonar.projectName=javaWebApp -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=jnknsSnrqb2  -Dsonar.sources=./ -Dsonar.language=java -Dsonar.java.binaries=."
