@@ -24,7 +24,7 @@ node {
    }
 
    stage('Build Dockerfile image'){
-        docker.withRegistry('', 'registryCredential') {
+        docker.withRegistry('https://hub.docker.com/', 'registryCredential') {
 		 app = docker.build("mohammedaminetrabzi/tomcat")
 
               docker.image('tomcat:9.0').withrun(' -p 8880:80') { c ->
