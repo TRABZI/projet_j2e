@@ -2,8 +2,13 @@ node {
     def app
 
     environment {
-	DOCKERHUB_CREDENTIALS=credentials('mohammedaminetrabzi-dockerhub')
-	}
+      registry = "mohammedaminetrabzi/docker_test"
+      registryCredential = ‘mon_id_docker’
+    }
+
+    stage('Clone repository') {
+        	git 'https://gitlab.com/khlifidev1/projet_j2e'
+    }
 
     stage('SonarQube Built-in Code analysis') {
         def scannerHome = tool 'sonar'
@@ -18,13 +23,17 @@ node {
      sh "${mvnHome}/bin/mvn clean compile package "
    }
 
-   stage('log-in'){
-	sh 'echo $DOCKERHUB_CREDENTIALS_PSW| docker logn -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-     }
+   stage('Build Dockerfile image'){
+        docker.withRegistry('https://hub.docker.com/', 'registryCredential') {
+		 app = docker.build("mohammedaminetrabzi/tomcat")
 
-   stage('Push'){
-    sh 'docker push mohammedaminetrabzi/docker_test'
-	
-   }
+              docker.image('tomcat:9.0').withrun(' -p 8880:80') { c ->
+                   sh 'docker ps'
+                   sh 'curl localhost'
+                }
+    app.push()
+
+    }
+
   }
 }
