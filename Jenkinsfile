@@ -19,7 +19,7 @@ node {
    }
 
    stage('Build Dockerfile image'){
-        docker.withRegistry('https://id.docker.com/', 'mohammedaminetrabzi') {
+        docker.withRegistry('https://id.docker.com/', 'f5201b2e-4d26-4fba-9a2c-32f35d896597') {
 		 app = docker.build("mohammedaminetrabzi/tomcat")
 
 
